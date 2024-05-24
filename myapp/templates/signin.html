@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/material-icons/material-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/mui.min.css">
+    
+    <title>Signin</title> 
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #D7D7D7;
+        color: #333;
+      }
+          h1, h2,  h3 {
+              text-align: center;
+              margin-bottom: 40px;
+              font-size: 36px;
+              animation: fadeInUp 1s ease;
+          }
+  
+          .card {
+              background-color: #333;
+              border-radius: 8px;
+              padding: 40px;
+              margin: 20px auto;
+              transition: background-color 0.3s ease;
+          
+              display: flex;
+              align-items: center;
+              justify-content: center;
+          }
+  
+  
+          label {
+              display: block;
+              margin-bottom: 8px;
+          }
+          form {
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 20px;
+              background-color: #f9f9f9;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+          input,
+          select {
+              width: 100%;
+              padding: 8px;
+              margin-bottom: 16px;
+              box-sizing: border-box;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+          }
+  
+          button {
+              background-color: #333;
+              color: #fff;
+              padding: 10px 20px;
+              border: none;
+              border-radius: 4px;
+              cursor: pointer;
+              font-size: 16px;
+              display: inline-block;
+              margin-right: 10px;
+              transition: background-color 0.3s ease;
+          }
+  
+          button:hover {
+              background-color: #555;
+          }
+  
+          graphContainer {
+              margin-top: 40px;
+              padding: 20px;
+              background-color: #fff;
+              border-radius: 8px;
+              box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          }
+  
+          canvas {
+              width: 100%;
+              height: auto;
+          }
+  
+  
+          .navbar {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              background-color: #333;
+              padding: 10px 20px;
+              color: #fff;
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+              position: fixed;
+              width: 100%;
+              z-index: 1000;
+          }
+  
+          .navbar img {
+              height: 40px;
+              width: auto;
+              margin-right: 10px;
+          }
+  
+          .navbar h2 {
+              margin: 0;
+              font-size: 24px;
+          }
+  
+          .dashboard-links {
+              margin-left: auto;
+          }
+  
+          .dashboard-links a {
+              color: #fff;
+              text-decoration: none;
+              margin-left: 20px;
+              transition: color 0.3s ease;
+          }
+  
+          .dashboard-links a:hover {
+              color: #ccc;
+          }
+  
+  
+          .navbar a {
+              color: #fff;
+              text-decoration: none;
+              padding: 10px 20px;
+              font-size: 16px;
+              margin: 0 10px;
+              border-radius: 4px;
+          }
+  
+          .navbar a:hover {
+              background-color: rgb(228, 162, 198);
+          }
+  
+          .active {
+              background-color: rgb(228, 162, 198);
+          }
+  
+  
+          table {
+              width: 100%;
+              margin-top: 20px;
+              border-collapse: collapse;
+          }
+  
+          table, th, td {
+              border: 1px solid #ddd;
+              padding: 8px;
+              text-align: left;
+              color: white;
+          }
+  
+          td input {
+              width: calc(100% - 16px);
+          }
+  
+          #excelPreview {
+              margin-top: 20px;
+          }
+          
+  
+          .active {
+              background-color: rgb(228, 162, 198);
+          }
+  
+  
+          .chart-container {
+              width: 80%;
+              overflow: hidden;
+          }
+  
+          /* Input Form */
+          #inputForm {
+              margin-bottom: 20px;
+          }
+  
+          .inputSet {
+              margin-bottom: 10px;
+          }
+  
+          label {
+              display: inline-block;
+              width: 150px;
+              margin-right: 10px;
+              color: #3f51b5; 
+          }
+  
+          input[type="text"] {
+              width: 200px;
+              padding: 5px;
+              box-sizing: border-box;
+              border: 1px solid #ccc;
+          }
+          @keyframes fadeInUp {
+              from {
+                  opacity: 0;
+                  transform: translateY(20px);
+              }
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+  
+          @keyframes slideInUp {
+              from {
+                  opacity: 0;
+                  transform: translateY(50px);
+              }
+              to {
+                  opacity: 1;
+                  transform: translateY(0);
+              }
+          }
+          @media screen and (max-width: 768px) {
+              .navbar {
+                  padding: 10px;
+              }
+              .container {
+                  padding: 10px;
+              }
+              h1 {
+                  font-size: 24px;
+              }
+              form {
+                  padding: 10px;
+              }
+              button {
+                  padding: 8px 16px;
+              }
+          }
+
+      
+      .wrapper {
+        position: relative;
+        max-width: 430px;
+        width: 100%;
+        color: white;
+        padding: 34px;
+        border-radius: 6px;
+        box-shadow: 50px 50px 50px rgba(0,0,0,0.2);
+        font-family: 'Roboto', sans-serif;
+              margin: 0;
+              padding: 0;
+              background-color: #f5f5f5;
+              color: #333;
+      }
+
+      .wrapper h2 {
+        position: relative;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .wrapper h2::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 28px;
+        border-radius: 12px;
+        background: #4070f4;
+      }
+
+      .wrapper form {
+        margin-top: 30px;
+      }
+
+      .wrapper form .input-box{
+        height: 52px;
+        margin: 18px 0;
+      }
+      
+      form .input-box input {
+        height: 100%;
+        width: 100%;
+        outline: none;
+        padding: 0 15px;
+        font-size: 17px;
+        font-weight: 400;
+        color: #333;
+        border: 1.5px solid #C7BEBE;
+        border-bottom-width: 2.5px;
+        border-radius: 6px;
+        transition: all 0.3s ease;
+      }
+
+      .input-box input:focus,
+
+      .input-box input:valid {
+        border-color: #4070f4;
+      }
+
+      form .policy {
+        display: flex;
+        align-items: center;
+      }
+      form h3 {
+        color: #707070;
+        font-size: 14px;
+        font-weight: 500;
+        margin-left: 10px;
+      }
+
+      .input-box.button input {
+        color: #fff;
+        letter-spacing: 1px;
+        border: none;
+        background: #4070f4;
+        cursor: pointer;
+      }
+
+      .input-box.button input:hover {
+        background: #303f9f;
+      }
+
+      form .text h3 {
+        color: #333;
+        width: 100%;
+        text-align: center;
+      }
+
+      form .text h3 a {
+        color: #4070f4;
+        text-decoration: none;
+      }
+
+      form .text h3 a:hover {
+        text-decoration: underline;
+      }
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+
+      .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+      }
+    </style>
+   </head>
+<body>
+  
+    {% for message in messages %}
+    <script>
+        alert("Message: {{ message }}");
+    </script>
+    {% endfor %}
+    <div class="wrapper">
+    <h3 style="margin-top: 20px">Sign In</h3>
+    <form action="/signin/" method="POST">
+        {% csrf_token %}
+        <div class="input-box">
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <br>
+        </div>
+        <div class="input-box">
+            <input type="password" id="pass1" name="pass1" placeholder="Password" required>
+            <br>
+        </div>
+        <div class="input-box button">
+          <input type="Submit" value="Sign In">
+        </div>
+    </form>
+    </div>
+</body>
+
+</html>

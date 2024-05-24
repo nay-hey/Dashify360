@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Ask a Question</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/material-icons/material-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/mui.min.css">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D7D7D7;
+            color: #333;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px 20px;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .navbar img {
+            height: 50px;
+            width: 80px;
+            margin-left: -15px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .dashboard-links {
+            margin-left: auto;
+            display: flex;
+        }
+
+        .dashboard-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dashboard-links a i {
+            margin-right: 5px;
+        }
+
+        .dashboard-links a:hover {
+            color: #ccc;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            border-radius: 4px;
+        }
+
+        .navbar a:hover {
+            background-color: rgb(228, 162, 198);
+        }
+
+        .active {
+            background-color: rgb(228, 162, 198);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: white;
+        }
+
+        td input {
+            width: calc(100% - 16px);
+        }
+
+        #excelPreview {
+            margin-top: 20px;
+        }        
+
+        .chart-container {
+            width: 80%;
+            overflow: hidden;
+        }
+
+        #inputForm {
+            margin-bottom: 20px;
+        }
+
+        .inputSet {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            color: #333
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+
+        
+        h1, h2,  h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 20px auto;
+            transition: background-color 0.3s ease;
+        
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 1s ease;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        graphContainer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .card {
+                padding: 20px;
+            }
+            form {
+                padding: 10px;
+            }
+            button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar">
+        <img src="../static/pandalogo.png" alt="Dashify360 Logo">
+        <h2>Dashify360</h2>
+        <div class="dashboard-links">
+            {% if request.user.is_authenticated %}
+            <a href="/signout/" style="text-align: right;"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+            <a href="/index_chartjs/" style="text-align: right;"> <i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            {% else %}
+            <a href="/signin/" style="text-align: right;"><i class="fa fa-fw fa-user"></i> Login</a>
+            <a href="/registration/" style="text-align: right;"><i class="fa fa-fw fa-user"></i> Register</a>
+            {% endif %}
+        </div>
+    </div>
+   
+        <div>
+            
+            <form  action="/ml_output/" id="questionForm" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}   
+                 
+                <h2 style="margin-top: 70px;">Ask a Question</h2>  
+                <label for="question_type">Select a Question Type:</label>
+                <select name="question_type" id="question_type">
+                    <option value="sort">Sort Data</option>
+                    <option value="search">Search Data</option>
+                    <option value="aggregate">Aggregate Data</option>
+                    <option value="ml_regression">ML Regression</option>
+                    <option value="ml_classification">ML Classification</option>
+                    <option value="basic_analysis">Basic Data Analysis</option>
+                </select>
+                <br><br>
+                <label for="question_column">Select a Column (if applicable):</label>
+                <select name="question_column" id="question_column">
+                    {% for column in df.columns %}
+                        <option value="{{ column }}">{{ column }}</option>
+                    {% endfor %}
+                </select>
+            <br><br>
+    
+                <!-- Additional inputs for searching, aggregation, and ML Classification -->
+                <div id="searchInputs" style="display: none;">
+                    <label for="search_value">Enter Search Value:</label>
+                    <input type="text" name="search_value" id="search_value">
+                </div>
+    
+                <div id="aggregationInputs" style="display: none;">
+                    <label for="aggregation_function">Select Aggregation Function:</label>
+                    <select name="aggregation_function" id="aggregation_function">
+                        <option value="sum">Sum</option>
+                        <option value="mean">Mean</option>
+                        <option value="max">Max</option>
+                        <option value="min">Min</option>
+                    </select>
+                    <br><br>
+                </div>
+    
+                <div id="mlClassificationInputs" style="display: none;">
+                    <label for="train_file">Upload Training CSV:</label>
+                    <input type="file" name="train_file" id="ml_classification_train_file" accept=".csv">
+                    <br><br>
+                    <label for="test_file">Upload Testing CSV:</label>
+                    <input type="file" name="test_file" id="ml_classification_test_file" accept=".csv">
+                    <br><br>
+                    <label for="target_column">Select Target Column:</label>
+                    <select name="target_column" id="ml_classification_target_column">
+                        {% for column in test_df.columns %}
+                            <option value="{{ column }}">{{ column }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                </div>
+    
+                <div id="mlRegressionInputs" style="display: none;">
+                    <label for="train_file">Upload Training CSV:</label>
+                    <input type="file" name="train_file" id="ml_regression_train_file" accept=".csv">
+                    <br><br>
+                    <label for="test_file">Upload Testing CSV:</label>
+                    <input type="file" name="test_file" id="ml_regression_test_file" accept=".csv">
+                    <br><br>
+                    <label for="target_column">Select Target Column:</label>
+                    <select name="target_column" id="ml_regression_target_column">
+                        {% for column in test_df.columns %}
+                            <option value="{{ column }}">{{ column }}</option>
+                        {% endfor %}
+                    </select>
+                    <br><br>
+                </div>
+                <button type="submit">Submit Question</button>
+            </form>
+        
+            <div id="answer"></div>
+        </div>
+    
+        <!-- Add any additional body elements or scripts here -->
+        <script>
+            function handleFileInput(fileInput, targetColumnId) {
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const csvData = event.target.result;
+                    const rows = csvData.split('\n');
+                    const headers = rows[0].split(',');
+                    updateColumnOptions(headers, targetColumnId);
+                };
+            
+                reader.readAsText(file);
+            }
+    
+            function updateColumnOptions(headers, targetColumnId) {
+                const targetColumnSelect = document.getElementById(targetColumnId);
+                targetColumnSelect.innerHTML = "";
+                headers.forEach((header) => {
+                    const option = document.createElement("option");
+                    option.value = header;
+                    option.textContent = header;
+                    targetColumnSelect.add(option);
+                });
+            }
+    
+            document.getElementById('ml_classification_train_file').addEventListener('change', function() {
+                handleFileInput(this, 'ml_classification_target_column');
+            });
+    
+            document.getElementById('ml_classification_test_file').addEventListener('change', function() {
+                handleFileInput(this, 'ml_classification_target_column');
+            });
+    
+            document.getElementById('ml_regression_train_file').addEventListener('change', function() {
+                handleFileInput(this, 'ml_regression_target_column');
+            });
+    
+            document.getElementById('ml_regression_test_file').addEventListener('change', function() {
+                handleFileInput(this, 'ml_regression_target_column');
+            });
+    
+            // Add event listener to handle input display logic
+            document.getElementById('question_type').addEventListener('change', function () {
+                var mlClassificationInputs = document.getElementById('mlClassificationInputs');
+                var mlRegressionInputs = document.getElementById('mlRegressionInputs');
+                var searchInputs = document.getElementById('searchInputs');
+                var aggregationInputs = document.getElementById('aggregationInputs');
+    
+                mlClassificationInputs.style.display = this.value === 'ml_classification' ? 'block' : 'none';
+                mlRegressionInputs.style.display = this.value === 'ml_regression' ? 'block' : 'none';
+                searchInputs.style.display = this.value === 'search' ? 'block' : 'none';
+                aggregationInputs.style.display = this.value === 'aggregate' ? 'block' : 'none';
+            });
+        </script>
+    
+    </body>
+    
+    </html>

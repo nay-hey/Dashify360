@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashify360</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/material-icons/material-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/mui.min.css">
+    
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D7D7D7;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px 20px;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+        .navbar img {
+            height: 50px;
+            width: 80px;
+            margin-left: -15px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .dashboard-links {
+            margin-left: auto;
+            display: flex;
+        }
+
+        .dashboard-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        
+        .dashboard-links a i {
+            margin-right: 5px;
+        }
+
+        .dashboard-links a:hover {
+            color: #ccc;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            border-radius: 4px;
+        }
+
+        .navbar a:hover {
+            background-color: rgb(228, 162, 198);
+        }
+
+        .active {
+            background-color: rgb(228, 162, 198);
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: white;
+        }
+
+        td input {
+            width: calc(100% - 16px);
+        }
+
+        #excelPreview {
+            margin-top: 20px;
+        }
+        
+        .chart-container {
+            width: 80%;
+            overflow: hidden;
+        }
+
+        #inputForm {
+            margin-bottom: 20px;
+        }
+
+        .inputSet {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+            margin-right: 10px;
+            color: #3f51b5; 
+        }
+
+        input[type="text"] {
+            width: 200px;
+            padding: 5px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+        }
+
+        h1, h2, h3 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 36px;
+            animation: fadeInUp 1s ease;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 40px;
+            margin: 20px auto;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 1s ease;
+        }
+
+        form {
+            max-width: 800px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+
+        .graphContainer {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+            background-color: white;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .card {
+                padding: 20px;
+            }
+            form {
+                padding: 10px;
+            }
+            button {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+    <title>Dashify360 Dashboard</title>
+    <!-- Include any necessary CSS or JavaScript libraries -->
+</head>
+<body>
+    <div class="navbar">
+        <img src="../static/pandalogo.png" alt="Dashify360 Logo">
+        <h2>Dashify360</h2>
+        <div class="dashboard-links">
+           
+            <a href="/index" style="text-align: right;"> <i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a href="/signout/" style="text-align: right;"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+            <a href="/index_chartjs/" style="text-align: right;"><i class="fa fa-fw fa-sign-out"></i>Handling CSV</a>
+        </div>
+    </div>
+
+    
+
+    <!-- Input Form -->
+    <form id="inputForm">
+        
+    <h1>Welcome to Dashify360</h1>
+       <label for="chartName"><h4 style="color: #333;">Chart Name:</h4></label>
+        <input type="text" id="chartName" name="chartName">
+        <br>
+        <label for="Xaxis"><h4 style="color: #333;">X axis Name:</h4></label>
+        <input type="text" id="Xaxis" name="Xaxis">
+        <br>
+        <label for="Yaxis"><h4 style="color: #333;">Y axis Name:</h4></label>
+        <input type="text" id="Yaxis" name="Yaxis">
+        <br>
+        <button type="button" onclick="addInputFieldsPrompt()">Add Lines</button>
+    <br>
+    <br>
+    
+    <div id="inputFields">
+        <!-- Add input fields dynamically -->
+    </div>
+        <label for="chartType"><h4 style="color: #333;">Select Chart Type:</h4></label>
+    <select id="chartType">
+        <option value="line">Line Graph</option>
+        <option value="bar">Bar Graph</option>
+        <option value="pie">Pie Chart</option>
+    </select>
+    
+    
+    <button type="submit">Submit</button>
+    <br>
+    </form>
+    
+    <!-- Graph Placeholder -->
+    <div id="graphContainer">
+        <canvas id="graphCanvas" width="160" height="60"></canvas>
+    </div>
+    
+    <!-- Include JavaScript code to handle form submission and graph rendering -->
+    <script>
+        // JavaScript code to handle form submission
+        
+        var myChart;
+        document.getElementById('inputForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission behavior
+            const chartName = document.getElementById('chartName').value;
+            const Xaxis = document.getElementById('Xaxis').value;
+            const Yaxis = document.getElementById('Yaxis').value;
+        
+            // Get the container element for input fields
+            const inputFieldsContainer = document.getElementById('inputFields');
+        
+            // Create arrays to store all x and y coordinates
+            const xCoordinatesArray = [];
+            const yCoordinatesArray = [];
+            const lineNamesArray = [];
+        
+            // Loop through all input sets and extract coordinates
+            const inputSets = inputFieldsContainer.getElementsByClassName('lineDiv');
+            for (let inputSet of inputSets) {
+                const lineName = inputSet.querySelector('.lineName').value;
+                const xCoordInputs = inputSet.querySelectorAll('.xCoord');
+                const yCoordInputs = inputSet.querySelectorAll('.yCoord');
+                const xCoords = [];
+                const yCoords = [];
+                xCoordInputs.forEach(input => {
+                    if (input.value) {
+                        xCoords.push(input.value);
+                    }
+                });
+                yCoordInputs.forEach(input => {
+                    if (input.value) {
+                        yCoords.push(parseFloat(input.value));
+                    }
+                });
+                // Ensure both x and y coordinates are provided
+                if (xCoords.length > 0 && yCoords.length > 0) {
+                    lineNamesArray.push(lineName);
+                    xCoordinatesArray.push(xCoords); // Store X coordinates as is
+                    yCoordinatesArray.push(yCoords);
+                }
+            }
+        
+            // Get the selected chart type
+            const chartType = document.getElementById('chartType').value;
+        console.log(xCoordinatesArray)
+        console.log(yCoordinatesArray)
+        
+            // Render the graph
+            renderGraph(chartName, chartType, xCoordinatesArray, yCoordinatesArray, lineNamesArray, Xaxis, Yaxis);
+        });
+
+        function addInputFields(m, n) {
+            // Get the container element for input fields
+            const inputFieldsContainer = document.getElementById('inputFields');
+
+            // Clear previous input fields
+            inputFieldsContainer.innerHTML = '';
+
+            // Create m sets of input fields
+            for (let i = 0; i < m; i++) {
+                const lineDiv = document.createElement('div');
+                lineDiv.classList.add('lineDiv');
+                const lineNameLabel = document.createElement('label');
+                lineNameLabel.textContent = `Line Name ${i + 1}:`;
+                const lineNameInput = document.createElement('input');
+                lineNameInput.type = 'text';
+                lineNameInput.classList.add('lineName');
+                lineNameInput.name = 'lineName';
+                lineDiv.appendChild(lineNameLabel);
+                lineDiv.appendChild(lineNameInput);
+
+                // Create n sets of input fields for each line
+                for (let j = 0; j < n; j++) {
+                    const newInputSet = document.createElement('div');
+                    newInputSet.classList.add('inputSet');
+
+                    const xCoordLabel = document.createElement('label');
+                    xCoordLabel.textContent = `X Coordinate ${j + 1} (Line ${i + 1}):`;
+                    const xCoordInput = document.createElement('input');
+                    xCoordInput.type = 'text';
+                    xCoordInput.classList.add('xCoord');
+                    xCoordInput.name = 'xCoord';
+                    newInputSet.appendChild(xCoordLabel);
+                    newInputSet.appendChild(xCoordInput);
+
+                    const yCoordLabel = document.createElement('label');
+                    yCoordLabel.textContent = `Y Coordinate ${j + 1} (Line ${i + 1}):`;
+                    const yCoordInput = document.createElement('input');
+                    yCoordInput.type = 'text';
+                    yCoordInput.classList.add('yCoord');
+                    yCoordInput.name = 'yCoord';
+                    newInputSet.appendChild(yCoordLabel);
+                    newInputSet.appendChild(yCoordInput);
+
+                    // Append the new input set to the line div
+                    lineDiv.appendChild(newInputSet);
+                }
+
+                // Append the line div to the container
+                inputFieldsContainer.appendChild(lineDiv);
+            }
+        }
+
+        // Function to prompt user for m and n and add input fields
+        function addInputFieldsPrompt() {
+            let m = prompt("Enter the number of lines:");
+            m = parseInt(m);
+
+            if (isNaN(m) || m <= 0) {
+                alert("Please enter a valid number greater than 0.");
+                return;
+            }
+
+            let n = prompt("Enter the number of points per line:");
+            n = parseInt(n);
+
+            if (isNaN(n) || n <= 0) {
+                alert("Please enter a valid number greater than 0.");
+                return;
+            }
+
+            addInputFields(m, n);
+        }
+        function determineAxisType(xCoords) {
+            // Check if all xCoords are numeric
+            const allNumeric = xCoords.every(x => !isNaN(parseFloat(x)));
+            return allNumeric ? 'linear' : 'category';
+        }
+        // Function to render the graph using Chart.js
+        function renderGraph(chartName, chartType, xCoordinatesArray, yCoordinatesArray, lineNamesArray, Xaxis, Yaxis) {
+            // Get the canvas element to render the chart
+            const canvas = document.getElementById('graphCanvas');
+
+            // Clear the previous chart if it exists
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            let xAxisType;
+            let datasets = [];
+        
+            // Preprocess xCoordinatesArray to determine the axis type
+            xCoordinatesArray.forEach((xCoords, lineIndex) => {
+                const axisType = determineAxisType(xCoords);
+                if (!xAxisType) {
+                    xAxisType = axisType;
+                } else if (xAxisType !== axisType) {
+                    console.error('Inconsistent axis types detected.');
+                    return;
+                }
+        
+                // Create dataset for each line
+                const dataPoints = xCoords.map((x, index) => ({
+                    x: x,
+                    y: yCoordinatesArray[lineIndex][index]
+                }));
+                datasets.push({
+                    label: lineNamesArray[lineIndex] || `Line ${lineIndex + 1}`,
+                    data: dataPoints,
+                    borderColor: getRandomColor(),
+                    backgroundColor: 'transparent',
+                    borderWidth: 1,
+                    showLine: true,
+                    pointRadius: 5,
+                    lineTension: 0.4
+                });
+            });
+        
+            let chartConfig;
+            if (chartType === 'line') {
+                
+            // Configure axis type based on the determined type
+            chartConfig = {
+                type: 'line',
+                data: {
+                    datasets: datasets
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: chartName || 'Line Chart'
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            type: xAxisType,
+                            position: 'bottom',
+                            title: {
+                                display: true,
+                                text: Xaxis || 'X Coordinate'
+                            }
+                        },
+                        y: {                            
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: Yaxis || 'Y Coordinate'
+                            }
+                        }
+                    }
+                }
+            };
+                // Loop through each set of coordinates and add them as a new dataset (line) to the chart
+                
+            } else if (chartType === 'bar') {
+                let allXLabels = [];
+                xCoordinatesArray.forEach(arr => {
+                    arr.forEach(x => {
+                        if (!allXLabels.includes(x)) {
+                            allXLabels.push(x);
+                        }
+                    });
+                });
+                datasets = [];
+                for (let i = 0; i < xCoordinatesArray.length; i++) {
+                    let dataPoints = [];
+                    allXLabels.forEach(label => {
+                        let index = xCoordinatesArray[i].indexOf(label);
+                        dataPoints.push(index >= 0 ? yCoordinatesArray[i][index] : 0);
+                    });
+
+                    datasets.push({
+                        label: lineNamesArray[i] || `Line ${i + 1}`,
+                        data: dataPoints,
+                        backgroundColor: getRandomColor()
+                    });
+                }
+                
+            
+                chartConfig = {
+                    type: 'bar',
+                    data: {
+                        labels: allXLabels,
+                        datasets: datasets
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: chartName || 'Bar Chart'
+                            }
+                        },
+                        scales: {
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: Yaxis || 'Y Coordinate'
+                                }
+                            },
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: Xaxis || 'X Coordinate'
+                                }
+                            }
+                        }
+                    }
+                };
+            } else if (chartType === 'pie') {
+               datasets = [];
+        for (let i = 0; i < xCoordinatesArray.length; i++) {
+            const lineColor = getRandomColor();
+
+            datasets.push({
+                label: lineNamesArray[i] || `Line ${i + 1}`,
+                data: yCoordinatesArray[i],
+                backgroundColor: xCoordinatesArray[i].map(() => getRandomColor())
+            });
+        }
+        console.log(datasets)
+
+        let allXLabels = [];
+        xCoordinatesArray.forEach(arr => {
+            allXLabels = allXLabels.concat(arr);
+        });
+
+        const uniqueXLabels = Array.from(new Set(allXLabels));
+
+        chartConfig = {
+            type: 'pie',
+            data: {
+                labels: uniqueXLabels,
+                datasets: datasets
+            },
+            options: {
+                plugins: {
+                    title: {
+                        display: true,
+                        text: chartName || 'Pie Chart'
+                    }
+                }
+            }
+        };
+    }
+
+            // Create a new Chart instance
+            window.myChart = new Chart(canvas, chartConfig);
+        }
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+</html>

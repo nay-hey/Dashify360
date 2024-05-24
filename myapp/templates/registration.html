@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title> 
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/material-icons/material-icons.min.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/mui.min.css">
+    
+    <script>
+      function validateForm() {
+        console.log('Validation function executed.');
+        var checkbox = document.getElementById('check');
+        if (!checkbox.checked) {
+            alert('Please accept the terms & conditions before proceeding.');
+            return false;
+        }
+        return true;
+      }
+    </script>
+    <style>
+      @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #D7D7D7;
+        color: #333;
+      }
+  
+      h1, h2,  h3 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-size: 36px;
+        animation: fadeInUp 1s ease;
+      }
+  
+      .card {
+        background-color: #333;
+        border-radius: 8px;
+        padding: 40px;
+        margin: 20px auto;
+        transition: background-color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+  
+      label {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      form {
+        display: flex;
+        flex-wrap: wrap;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      
+      input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 16px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .input-box {
+        flex: 1 1 45%;
+        margin: 10px;
+      }
+
+      button {
+        background-color: #333;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        display: inline-block;
+        margin-right: 10px;
+        transition: background-color 0.3s ease;
+      }
+  
+      button:hover {
+        background-color: #555;
+      }
+
+      .policy {
+        display: flex;
+        align-items: center;
+        margin: 10px;
+        flex: 1 1 100%;
+      }
+      
+      .policy input[type="checkbox"] {
+        margin: 0 10px 0 0; /* Adds space between checkbox and text */
+      }
+      
+      .policy h3 {
+        color: #707070;
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+        white-space: nowrap; /* Prevents text wrapping */
+      }
+      .input-box.button {
+        flex: 1 1 100%;
+      }
+
+      .input-box.button input {
+        color: #fff;
+        letter-spacing: 1px;
+        border: none;
+        background: #4070f4;
+        cursor: pointer;
+      }
+
+      .input-box.button input:hover {
+        background: #303f9f;
+      }
+
+      .text {
+        flex: 1 1 100%;
+        text-align: center;
+      }
+
+      .text h3 {
+        color: #333;
+        width: 100%;
+      }
+
+      .text h3 a {
+        color: #4070f4;
+        text-decoration: none;
+      }
+
+      .text h3 a:hover {
+        text-decoration: underline;
+      }
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .navbar {
+          padding: 10px;
+        }
+        .container {
+          padding: 10px;
+        }
+        h1 {
+          font-size: 24px;
+        }
+        form {
+          padding: 10px;
+        }
+        button {
+          padding: 8px 16px;
+        }
+        .input-box {
+          flex: 1 1 100%;
+        }
+      }
+
+      
+      .wrapper {
+        position: relative;
+        max-width: 1200px;
+        width: 100%;
+        background: #f5f5f5;
+        color: #333;
+        padding: 34px;
+        border-radius: 6px;
+        box-shadow: 50px 50px 50px rgba(0, 0, 0, 0.2);
+      }
+
+      .wrapper h2 {
+        position: relative;
+        font-size: 22px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      .wrapper h2::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        height: 3px;
+        width: 28px;
+        border-radius: 12px;
+        background: #4070f4;
+      }
+      
+      .alert {
+        padding: 15px;
+        margin-bottom: 20px;
+        border: 1px solid transparent;
+        border-radius: 4px;
+      }
+
+      .alert-success {
+        color: #3c763d;
+        background-color: #dff0d8;
+        border-color: #d6e9c6;
+      }
+    </style>
+   </head>
+<body>
+  {% for message in messages %}
+    <script>
+        alert("Message: {{ message }}");
+    </script>
+    {% endfor %}
+  <div class="wrapper">
+    <div class="text">
+    <h3>Registration</h3>
+    </div>
+    <form action="/registration/" method="POST">
+      {% csrf_token %}
+      <div class="input-box">
+        <input type="text" id="username" name="username" placeholder="Create a Username" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="fname" name="fname" placeholder="Enter your First name" required>
+      </div>
+      <div class="input-box">
+        <input type="text" id="lname" name="lname" placeholder="Enter your Last name" required>
+      </div>
+      <div class="input-box">
+        <input type="email" id="email" name="email" placeholder="Enter your Email Address" required>
+      </div>
+      <div class="input-box">
+        <input type="password" id="pass1" name="pass1" placeholder="Create a Password" required>
+      </div>
+      <div class="input-box">
+        <input type="password" id="pass2" name="pass2" placeholder="Confirm your Password" required>
+      </div>
+      <div class="policy">
+        <input type="checkbox" id="check">
+      </div>
+      
+      <h7 style="color: #707070; font-size: 14px; font-weight: 500;">I accept all terms & condition</h7>
+      <div class="input-box button">
+        <input type="submit" value="Register Now" onclick="return validateForm()">
+      </div>
+      <div class="text">
+        <h4>Already have an account? <a href="/signin/">Login now</a></h4>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

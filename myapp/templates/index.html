@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">    
+    <title>Dashify360</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/material-icons/material-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mui/5.1.0-beta.2/mui.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #D7D7D7;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: rgba(51, 51, 51, 0.9);
+            padding: 10px 20px;
+            color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            top: 0;
+        }
+
+        .navbar img {
+            height: 50px;
+            width: 80px;
+            margin-left: -15px;
+        }
+
+        .navbar h2 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .dashboard-links {
+            margin-left: auto;
+            display: flex;
+        }
+
+        .dashboard-links a {
+            color: #fff;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .dashboard-links a i {
+            margin-right: 5px;
+        }
+
+        .dashboard-links a:hover {
+            color: #ccc;
+        }
+
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            border-radius: 4px;
+        }
+
+        .navbar a:hover {
+            background-color: rgb(228, 162, 198);
+        }
+
+        .active {
+            background-color: rgb(228, 162, 198);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            animation: fadeInUp 1s ease;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .btn {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            display: inline-block;
+            margin: 10px 0;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background-color: #555;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .navbar {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 24px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .btn {
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <img src="../static/pandalogo.png" alt="Dashify360 Logo">
+        <h2>Dashify360</h2>
+        <div class="dashboard-links">
+            <a href="/index" class="active"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+            <a href="/signout/"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h1 style="margin-top: 70px;">Welcome to Dashify360</h1>
+            <p>Your all-in-one solution for creating interactive dashboards.</p>
+            <a href="{% url 'dashboard' %}" class="btn">Get Started</a>
+            <p>Your all-in-one solution for handling CSV files.</p>
+            <a href="/index_chartjs/" class="btn">Go to New App</a>
+        </div>
+    </div>
+</body>
+</html>
