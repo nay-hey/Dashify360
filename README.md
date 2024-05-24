@@ -1,3 +1,6 @@
+I have added new features to the existing project available on GitHub.
+https://github.com/nay-hey/DevHack.git
+
 ## Project Setup Instructions
 
 ### Prerequisites
