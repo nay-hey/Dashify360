@@ -1,0 +1,51 @@
+/* styles.css */
+
+/* Monotonic Green Theme */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+h1 {
+    color: #333;
+}
+
+/* Input Form */
+#inputForm {
+    margin-bottom: 20px;
+}
+
+.inputSet {
+    margin-bottom: 10px;
+}
+
+label {
+    display: inline-block;
+    width: 100px;
+}
+
+input[type="text"] {
+    width: 150px;
+}
+
+button {
+    padding: 8px 16px;
+    background-color: #2ecc71; /* Green button */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #27ae60; /* Darker green on hover */
+}
+
+/* Graph Container */
+#graphContainer {
+    margin-top: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+}
