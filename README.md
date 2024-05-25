@@ -49,6 +49,22 @@ https://github.com/nay-hey/DevHack.git
      FLUSH PRIVILEGES;
      ```
 
+5. **Change settings.py in CentralPerk folder**:
+   - Go to DATABASES section:
+     ```sql
+     DATABASES = {
+          'default': {
+              'ENGINE': 'django.db.backends.mysql',
+              'NAME': #'name',
+              'HOST' : '127.0.0.1',
+              'PORT' : '3306',
+              'USER' : #'username',
+              'PASSWORD' : #'password',
+          }
+      }
+     ```
+   - Edit this DATABASES section accordingly.
+
 ### Django Setup
 1. **Make migrations**:
    - In the terminal, navigate to your project directory and run:
